@@ -10,9 +10,6 @@ interface WalletProps {
 }
 
 export default function Wallet(props: WalletProps) {
-    if (!IS_BROWSER) {
-        return <div>Loading...</div>;
-    }
 	const [userAddress, setUserAddress] = useState(props.address);
 	const [connected, setConnected] = useState(true);
 	useEffect(() => {
@@ -27,6 +24,7 @@ export default function Wallet(props: WalletProps) {
 			}
 		}
 		checkConnection();
+		console.log("client");
 	}, []);
 
 	async function signIn() {
@@ -44,9 +42,7 @@ export default function Wallet(props: WalletProps) {
 		<div class={tw`flex flex-col gap-2 w-full`}>
 			<button
 				class={tw`block w-full px-12 py-3 text-sm font-medium text-white bg-green-600 border border-green-600 rounded sm:w-auto active:text-opacity-75 hover:bg-green-400 focus:outline-none focus:ring disabled:opacity-50 disabled:cursor-not-allowed`}
-				onClick={signIn}
-                disabled={!IS_BROWSER}
-                >
+				onClick={signIn}>
 				Connect
 			</button>
 			<p class={tw`flex-grow-1 font-bold text-xl`}>{userAddress}</p>
