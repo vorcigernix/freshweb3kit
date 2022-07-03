@@ -43,6 +43,7 @@ export default function Contract(props: ContractProps) {
 
 			// The Contract object
 			const daiContract = new ethers.Contract(daiAddress, daiAbi, provider);
+            // @ts-ignore: Deno is not aware of ABIs
 			const daiName = await daiContract.name();
             setDaiName(daiName);
 		} catch (err) {
