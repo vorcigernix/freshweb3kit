@@ -3,7 +3,7 @@ import { h } from "preact";
 import { tw } from "@twind";
 
 import Wallet from "../islands/Wallet.tsx";
-import Counter from "../islands/Counter.tsx";
+import Contract from "../islands/Contract.tsx";
 
 export default function Home() {
   return (
@@ -17,7 +17,7 @@ export default function Home() {
         Welcome to `fresh web3 kit`. This is a simple web3 kit for bootstrapping a new web3 project using Deno and Fresh.
       </p>
       <Wallet address="not connected" />
-      {/* <Counter start={3} /> */}
+      <Contract name="Contract name unknown" />
 
     </div>
   );
