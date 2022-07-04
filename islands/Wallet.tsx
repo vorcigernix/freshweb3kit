@@ -5,6 +5,8 @@ import { IS_BROWSER } from "$fresh/runtime.ts";
 import { tw } from "@twind";
 import { ethers, providers } from "ethers";
 
+
+//This is not used anymore, keeping as an example. See Navigation for wallet connecting functionality.
 interface WalletProps {
 	address: string;
 }
