@@ -1,5 +1,5 @@
 User-agent: Googlebot
 Disallow: 
 User-agent: *
-Disallow: 
 Disallow: /islands/
+Sitemap: https://superfresh.deno.dev/sitemap.xml

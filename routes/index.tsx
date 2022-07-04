@@ -96,7 +96,33 @@ export default function Home({ data }: PageProps<EthPrice | null>) {
 				<title>SuperFresh - a Web3 Fresh kit</title>
 				<meta
 					name='description'
-					content="A sample repository you can use to bootstrap a web3 development on Deno framework called Fresh."></meta>
+					content='A sample repository you can use to bootstrap a web3 development on Deno framework called Fresh.'
+				/>
+
+				<meta property='og:url' content='https://superfresh.deno.dev/' />
+				<meta property='og:type' content='website' />
+				<meta property='og:title' content='SuperFresh - a Web3 Fresh kit' />
+				<meta
+					property='og:description'
+					content='A sample repository you can use to bootstrap a web3 development on Deno framework called Fresh.'
+				/>
+				<meta
+					property='og:image'
+					content=' https://superfresh.deno.dev/superfreshog.png'
+				/>
+
+				<meta name='twitter:card' content='summary_large_image' />
+				<meta property='twitter:domain' content='superfresh.deno.dev' />
+				<meta property='twitter:url' content='https://superfresh.deno.dev/' />
+				<meta name='twitter:title' content='SuperFresh - a Web3 Fresh kit' />
+				<meta
+					name='twitter:description'
+					content='A sample repository you can use to bootstrap a web3 development on Deno framework called Fresh.'
+				/>
+				<meta
+					name='twitter:image'
+					content=' https://superfresh.deno.dev/superfreshog.png'
+				/>
 			</Head>
 
 			<section class={tw`text-white bg-gray-900`}>
@@ -134,6 +160,14 @@ export default function Home({ data }: PageProps<EthPrice | null>) {
 					</div>
 				</div>
 			</section>
+			<div class={tw`px-4 py-3 text-white bg-gray-800`}>
+				<p class={tw`text-sm font-medium text-center`}>
+					UI Modules are built using &nbsp;
+					<a class={tw`underline`} href='https://www.hyperui.dev/'>
+						HyperUI Components &rarr;
+					</a>
+				</p>
+			</div>
 		</Fragment>
 	);
 }
