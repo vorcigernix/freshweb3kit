@@ -1,6 +1,7 @@
 /** @jsx h */
-import { h } from "preact";
+import { Fragment, h } from "preact";
 import { Handlers, PageProps } from "$fresh/server.ts";
+import { Head } from "$fresh/runtime.ts";
 import { tw } from "@twind";
 import { ethers } from "ethers";
 
@@ -90,40 +91,49 @@ export const handler: Handlers<EthPrice | null> = {
 
 export default function Home({ data }: PageProps<EthPrice | null>) {
 	return (
-		<section class={tw`text-white bg-gray-900`}>
-			<div
-				class={tw`max-w-screen-xl px-4 py-32 mx-auto lg:h-screen lg:items-center lg:flex`}>
-				<div class={tw`max-w-3xl mx-auto text-center`}>
-					<h1
-						class={tw`text-3xl font-extrabold text-transparent sm:text-5xl bg-clip-text bg-gradient-to-r from-green-300 via-blue-500 to-purple-600`}>
-						SuperFresh Web3.
-						<span class={tw`sm:block`}>Increase Conversion.</span>
-					</h1>
+		<Fragment>
+			<Head>
+				<title>SuperFresh - a Web3 Fresh kit</title>
+				<meta
+					name='description'
+					content="A sample repository you can use to bootstrap a web3 development on Deno framework called Fresh."></meta>
+			</Head>
 
-					<p class={tw`max-w-xl mx-auto mt-4 sm:leading-relaxed sm:text-xl`}>
-						This is a landing page example for the SuperFresh Web3. It shows a
-						super fast static page rendering of Fresh framework with a sprinkle
-						of web3 backend service used on server side.
-					</p>
+			<section class={tw`text-white bg-gray-900`}>
+				<div
+					class={tw`max-w-screen-xl px-4 py-32 mx-auto lg:h-screen lg:items-center lg:flex`}>
+					<div class={tw`max-w-3xl mx-auto text-center`}>
+						<h1
+							class={tw`text-3xl font-extrabold text-transparent sm:text-5xl bg-clip-text bg-gradient-to-r from-green-300 via-blue-500 to-purple-600`}>
+							SuperFresh Web3.
+							<span class={tw`sm:block`}>Increase Conversion.</span>
+						</h1>
 
-					<div class={tw`flex flex-wrap justify-center gap-4 mt-8`}>
-						<a
-							href='https://github.com/vorcigernix/freshweb3kit'
-							class={tw`block w-full px-12 py-3 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded sm:w-auto active:text-opacity-75 hover:bg-transparent hover:text-white focus:outline-none focus:ring`}>
-							Github
-						</a>
+						<p class={tw`max-w-xl mx-auto mt-4 sm:leading-relaxed sm:text-xl`}>
+							This is a landing page example for the SuperFresh Web3. It shows a
+							super fast static page rendering of Fresh framework with a
+							sprinkle of web3 backend service used on server side.
+						</p>
 
-						<a
-							href='/islands'
-							class={tw`block w-full px-12 py-3 text-sm font-medium text-white border border-blue-600 rounded sm:w-auto hover:bg-blue-600 active:bg-blue-500 focus:outline-none focus:ring`}>
-							App Page
-						</a>
+						<div class={tw`flex flex-wrap justify-center gap-4 mt-8`}>
+							<a
+								href='https://github.com/vorcigernix/freshweb3kit'
+								class={tw`block w-full px-12 py-3 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded sm:w-auto active:text-opacity-75 hover:bg-transparent hover:text-white focus:outline-none focus:ring`}>
+								Github
+							</a>
+
+							<a
+								href='/islands'
+								class={tw`block w-full px-12 py-3 text-sm font-medium text-white border border-blue-600 rounded sm:w-auto hover:bg-blue-600 active:bg-blue-500 focus:outline-none focus:ring`}>
+								App Page
+							</a>
+						</div>
+						<p class={tw`max-w-xl mx-auto mt-4 sm:leading-relaxed sm:text-xl`}>
+							Current price of Ethereum is: ${data?.price}
+						</p>
 					</div>
-					<p class={tw`max-w-xl mx-auto mt-4 sm:leading-relaxed sm:text-xl`}>
-						Current price of Ethereum is: ${data?.price}
-					</p>
 				</div>
-			</div>
-		</section>
+			</section>
+		</Fragment>
 	);
 }
