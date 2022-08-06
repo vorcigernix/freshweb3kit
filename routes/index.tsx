@@ -3,13 +3,16 @@ import { Fragment, h } from "preact";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import { tw } from "@twind";
-import { ethers } from "ethers";
+import { BigDecimal } from "../utils/bigdecimal.ts";
+import { JSONRPC } from "../utils/jsonrpc.ts";
+import { Token } from "../utils/token.ts";
 
-interface EthPrice {
+interface OraclePrice {
+	description: string;
 	price: number;
 }
 
-export const handler: Handlers<EthPrice | null> = {
+export const handler: Handlers<OraclePrice | null> = {
 	async GET(_, ctx) {
 		//const { parameter } = ctx.params; - this is how you get the parameter named parameter from the URL
 		const infuraID = Deno.env.get("INFURA_ID")!;
@@ -17,79 +20,35 @@ export const handler: Handlers<EthPrice | null> = {
 			//if running locally, you can set your Infura ID by writing something like "export INFURA_ID=91bd0cf1caaf40379d0b70ef7f113813". Refer to https://infura.io/ for an Infura ID.
 			throw new Error("INFURA_ID is not set");
 		}
-		const provider = new ethers.providers.JsonRpcProvider(
-			`https://rinkeby.infura.io/v3/${infuraID}`
+
+		//const infura = new JSONRPC(`https://rinkeby.infura.io/v3/${infuraID}`);
+		const ankr = new JSONRPC(`https://rpc.ankr.com/eth_rinkeby`);
+		const priceFeed = new Token(
+			ankr,
+			"0xECe365B379E1dD183B20fc5f022230C044d51404"
 		);
-		const aggregatorV3InterfaceABI = [
-			{
-				inputs: [],
-				name: "decimals",
-				outputs: [{ internalType: "uint8", name: "", type: "uint8" }],
-				stateMutability: "view",
-				type: "function",
-			},
-			{
-				inputs: [],
-				name: "description",
-				outputs: [{ internalType: "string", name: "", type: "string" }],
-				stateMutability: "view",
-				type: "function",
-			},
-			{
-				inputs: [{ internalType: "uint80", name: "_roundId", type: "uint80" }],
-				name: "getRoundData",
-				outputs: [
-					{ internalType: "uint80", name: "roundId", type: "uint80" },
-					{ internalType: "int256", name: "answer", type: "int256" },
-					{ internalType: "uint256", name: "startedAt", type: "uint256" },
-					{ internalType: "uint256", name: "updatedAt", type: "uint256" },
-					{ internalType: "uint80", name: "answeredInRound", type: "uint80" },
-				],
-				stateMutability: "view",
-				type: "function",
-			},
-			{
-				inputs: [],
-				name: "latestRoundData",
-				outputs: [
-					{ internalType: "uint80", name: "roundId", type: "uint80" },
-					{ internalType: "int256", name: "answer", type: "int256" },
-					{ internalType: "uint256", name: "startedAt", type: "uint256" },
-					{ internalType: "uint256", name: "updatedAt", type: "uint256" },
-					{ internalType: "uint80", name: "answeredInRound", type: "uint80" },
-				],
-				stateMutability: "view",
-				type: "function",
-			},
-			{
-				inputs: [],
-				name: "version",
-				outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-				stateMutability: "view",
-				type: "function",
-			},
-		];
-		const addr = "0x8A753747A1Fa494EC906cE90E9f37563A8AF630e";
-		const priceFeed = new ethers.Contract(
-			addr,
-			aggregatorV3InterfaceABI,
-			provider
-		);
-		// @ts-ignore: Deno is not aware of ABIs
+
 		const bigprice = await priceFeed.latestRoundData();
 		if (!bigprice) {
 			console.log("price is null");
 			return ctx.render(null);
 		}
-		const priceObj: EthPrice = {
-			price: ethers.utils.formatUnits(bigprice.answer, 8),
+		const decimals = await priceFeed.decimals();
+		const description = await priceFeed.description();
+
+		const priceObj: OraclePrice = {
+			description: description,
+			price: Number(new BigDecimal(bigprice, decimals)),
 		};
-		console.log("price is ", priceObj.price);
+
+		console.log(description);
+		console.log("price is ", bigprice); //priceObj.price);
+
 		return ctx.render(priceObj);
 	},
 };
 
-export default function Home({ data }: PageProps<EthPrice | null>) {
+export default function Home({ data }: PageProps<OraclePrice | null>) {
 	return (
 		<Fragment>
 			<Head>
@@ -155,7 +114,7 @@ export default function Home({ data }: PageProps<EthPrice | null>) {
 							</a>
 						</div>
 						<p class={tw`max-w-xl mx-auto mt-4 sm:leading-relaxed sm:text-xl`}>
-							Current price of Ethereum is: ${data?.price}
+							Current price of ${data?.description} is: ${data?.price}
 						</p>
 					</div>
 				</div>
