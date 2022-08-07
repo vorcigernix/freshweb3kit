@@ -84,12 +84,18 @@ export default function Navigation() {
 
 					<div class={tw`flex items-center gap-4`}>
 						<div class={tw`sm:gap-4 sm:flex`}>
-							<button
-								disabled={!IS_BROWSER || connected}
-								onClick={signIn}
-								class={tw`px-5 py-2.5 text-sm font-medium text-white bg-blue-600 rounded-md shadow disabled:(bg-gray-800 border border-blue-600 opacity-50 cursor-not-allowed)`}>
-								Connect
-							</button>
+							{connected ? (
+								<div
+									class={tw`px-5 py-2.5 text-sm font-medium text-white bg-blue-600 rounded-md shadow disabled:(bg-gray-800 border border-blue-600 opacity-50 cursor-not-allowed)`}>
+									Connected
+								</div>
+							) : (
+								<button
+									onClick={signIn}
+									class={tw`px-5 py-2.5 text-sm font-medium text-white bg-blue-600 rounded-md shadow disabled:(bg-gray-800 border border-blue-600 opacity-50 cursor-not-allowed)`}>
+									Connect
+								</button>
+							)}
 						</div>
 
 						<div class={tw`block md:hidden`}>

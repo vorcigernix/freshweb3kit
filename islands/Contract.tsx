@@ -10,7 +10,7 @@ interface ContractProps {
 }
 
 export default function Contract(props: ContractProps) {
-	const [daiName, setDaiName] = useState(props.name);
+	const [result, setResult] = useState(props.name);
 	const [connected, setConnected] = useState(true);
 	const [loading, setLoading] = useState(false);
 	useEffect(() => {
@@ -26,28 +26,20 @@ export default function Contract(props: ContractProps) {
 		checkConnection();
 	}, []);
 
+
+
 	async function callContract() {
 		setLoading(true);
 		try {
 			const provider = new providers.Web3Provider(window.ethereum);
-			// You can also use an ENS name for the contract address
-			const daiAddress = "dai.tokens.ethers.eth";
-
-			// The ERC-20 Contract ABI, which is a common contract interface
-			// for tokens (this is the Human-Readable ABI format)
-			const daiAbi = [
-				// Some details about the token
-				"function name() view returns (string)",
-
-				// Get the account balance
-				"function balanceOf(address) view returns (uint)",
-			];
-
-			// The Contract object
-			const daiContract = new ethers.Contract(daiAddress, daiAbi, provider);
-			// @ts-ignore: Deno is not aware of ABIs
-			const daiName = await daiContract.name();
-			setDaiName(daiName);
+			await provider.send("eth_requestAccounts", []);
+			const signer = provider.getSigner();
+			const tx = signer.sendTransaction({
+				to: "0x3fd2E00db399db1b83A1c2A4D1c908C376e42d76",
+				value: ethers.utils.parseEther("0.01")
+			});
+			const receipt = await tx.wait();
+			setResult(receipt.transactionHash);
 		} catch (err) {
 			console.log("error: ", err);
 		}
@@ -60,7 +52,7 @@ export default function Contract(props: ContractProps) {
 			<div class={tw`sm:items-end sm:justify-between sm:flex`}>
 				<div class={tw`max-w-xl`}>
 					<p class={tw`text-3xl font-bold text-white sm:text-4xl`}>
-						Call Smart Contracts like there is no tommorow.
+						Send me few bucks ;-)
 					</p>
 				</div>
 
@@ -99,7 +91,7 @@ export default function Contract(props: ContractProps) {
 					)}
 				</button>
 			</div>
-			<p class={tw`flex-grow-1 text-white font-bold text-xl`}>{daiName}</p>
+			<p class={tw`flex-grow-1 text-white font-bold text-xl`}>Transaction: {result}</p>
 		</aside>
 	);
 }

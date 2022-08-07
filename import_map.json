@@ -8,6 +8,7 @@
 		"twind": "https://esm.sh/twind@0.16.17",
 		"twind/": "https://esm.sh/twind@0.16.17/",
 		"etabi": "https://deno.land/x/ethabi/mod.ts",
-		"ethers": "https://cdn.skypack.dev/ethers"
+		"ethers": "https://cdn.ethers.io/lib/ethers-5.2.esm.min.js",
+		"eeth": "https://cdn.skypack.dev/essential-eth?dts"
 	}
 }

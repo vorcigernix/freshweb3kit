@@ -11,6 +11,10 @@ interface WalletProps {
 	address: string;
 }
 
+interface Window {
+    ethereum: any
+}
+
 export default function Wallet(props: WalletProps) {
 	const [userAddress, setUserAddress] = useState(props.address);
 	const [connected, setConnected] = useState(true);
