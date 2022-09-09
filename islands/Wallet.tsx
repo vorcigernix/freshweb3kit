@@ -1,8 +1,5 @@
-/** @jsx h */
-import { h } from "preact";
 import { useState, useEffect } from "preact/hooks";
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import { tw } from "@twind";
 import { ethers, providers } from "ethers";
 
 
@@ -46,16 +43,16 @@ export default function Wallet(props: WalletProps) {
 
 
 	return (
-		<div class={tw`flex flex-col gap-2 w-full`}>
-			<div class={tw`flex flex-row gap-2 w-full`}>
+		<div class="flex flex-col gap-2 w-full">
+			<div class="flex flex-row gap-2 w-full">
 				<button
-					class={tw`block w-full px-12 py-3 text-sm font-medium text-white bg-green-600 border border-green-600 rounded sm:w-auto active:text-opacity-75 hover:bg-green-400 focus:outline-none focus:ring disabled:opacity-50 disabled:cursor-not-allowed`}
+					class="block w-full px-12 py-3 text-sm font-medium text-white bg-green-600 border border-green-600 rounded sm:w-auto active:text-opacity-75 hover:bg-green-400 focus:outline-none focus:ring disabled:opacity-50 disabled:cursor-not-allowed"
 					disabled={!IS_BROWSER || connected}
 					onClick={signIn}>
 					Connect
 				</button>
 			</div>
-			<p class={tw`flex-grow-1 font-bold text-xl`}>{userAddress}</p>
+			<p class="flex-grow-1 font-bold text-xl">{userAddress}</p>
 		</div>
 	);
 }

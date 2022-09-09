@@ -1,8 +1,5 @@
-/** @jsx h */
-import { h } from "preact";
 import { useState, useEffect } from "preact/hooks";
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import { tw } from "@twind";
 import { ethers, providers } from "ethers";
 
 interface ContractProps {
@@ -48,10 +45,10 @@ export default function Contract(props: ContractProps) {
 
 	return (
 		<aside
-			class={tw`p-12 pt-48 sm:p-16 sm:pt-64 bg-gradient-to-r from-purple-600 to-blue-500`}>
-			<div class={tw`sm:items-end sm:justify-between sm:flex`}>
-				<div class={tw`max-w-xl`}>
-					<p class={tw`text-3xl font-bold text-white sm:text-4xl`}>
+			class="p-12 pt-48 sm:p-16 sm:pt-64 bg-gradient-to-r from-purple-600 to-blue-500">
+			<div class="sm:items-end sm:justify-between sm:flex">
+				<div class="max-w-xl">
+					<p class="text-3xl font-bold text-white sm:text-4xl">
 						Send me few bucks ;-)
 					</p>
 				</div>
@@ -59,11 +56,11 @@ export default function Contract(props: ContractProps) {
 				<button
 					disabled={!IS_BROWSER}
 					onClick={callContract}
-					class={tw`inline-block px-8 py-4 mt-4 text-blue-500 bg-white rounded-lg shadow-lg hover:opacity-75 sm:mt-0 sm:ml-8 disabled:(opacity-10 cursor-not-allowed)`}>
+					class="inline-block px-8 py-4 mt-4 text-blue-500 bg-white rounded-lg shadow-lg hover:opacity-75 sm:mt-0 sm:ml-8 disabled:(opacity-10 cursor-not-allowed)">
 					{loading ? (
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
-							class={tw`w-5 h-5 sm:h-8 sm:w-8`}
+							class="w-5 h-5 sm:h-8 sm:w-8"
 							fill='none'
 							viewBox='0 0 24 24'
 							stroke='currentColor'
@@ -77,7 +74,7 @@ export default function Contract(props: ContractProps) {
 					) : (
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
-							class={tw`w-5 h-5 sm:h-8 sm:w-8`}
+							class="w-5 h-5 sm:h-8 sm:w-8"
 							fill='none'
 							viewBox='0 0 24 24'
 							stroke='currentColor'>
@@ -91,7 +88,7 @@ export default function Contract(props: ContractProps) {
 					)}
 				</button>
 			</div>
-			<p class={tw`flex-grow-1 text-white font-bold text-xl`}>Transaction: {result}</p>
+			<p class="flex-grow-1 text-white font-bold text-xl">Transaction: {result}</p>
 		</aside>
 	);
 }

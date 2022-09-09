@@ -1,9 +1,5 @@
-/** @jsx h */
-import { h } from "preact";
 import { useState, useEffect } from "preact/hooks";
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import { tw } from "@twind";
-
 import { ethers, providers } from "ethers";
 
 export default function Navigation() {
@@ -32,15 +28,15 @@ export default function Navigation() {
 	}
 
 	return (
-		<header class={tw`bg-gray-900`}>
-			<div class={tw`max-w-screen-xl px-4 mx-auto sm:px-6 lg:px-8`}>
-				<div class={tw`flex items-center justify-between h-16`}>
-					<div class={tw`md:flex md:items-center md:gap-12`}>
-						<a href='/' class={tw`block text-blue-300`}>
-							<span class={tw`sr-only`}>Home</span>
+		<header class="bg-gray-900">
+			<div class="max-w-screen-xl px-4 mx-auto sm:px-6 lg:px-8">
+				<div class="flex items-center justify-between h-16">
+					<div class="md:flex md:items-center md:gap-12">
+						<a href='/' class="block text-blue-300">
+							<span class="sr-only">Home</span>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
-								class={tw`h-6 w-6`}
+								class="h-6 w-6"
 								fill='none'
 								viewBox='0 0 24 24'
 								stroke='currentColor'
@@ -56,17 +52,17 @@ export default function Navigation() {
 						</a>
 					</div>
 
-					<div class={tw`hidden md:block`}>
+					<div class="hidden md:block">
 						<nav aria-labelledby='header-navigation'>
-							<h2 class={tw`sr-only`} id='header-navigation'>
+							<h2 class="sr-only" id='header-navigation'>
 								Header navigation
 							</h2>
 
-							<ul class={tw`flex items-center gap-6 text-sm`}>
+							<ul class="flex items-center gap-6 text-sm">
 								<li>
 									<a
 										href='/islands'
-										class={tw`text-white transition hover:text-gray-50`}>
+										class="text-white transition hover:text-gray-50">
 										App
 									</a>
 								</li>
@@ -74,7 +70,7 @@ export default function Navigation() {
 								<li>
 									<a
 										href='/'
-										class={tw`text-white transition hover:text-gray-50`}>
+										class="text-white transition hover:text-gray-50">
 										About
 									</a>
 								</li>
@@ -82,28 +78,28 @@ export default function Navigation() {
 						</nav>
 					</div>
 
-					<div class={tw`flex items-center gap-4`}>
-						<div class={tw`sm:gap-4 sm:flex`}>
+					<div class="flex items-center gap-4">
+						<div class="sm:gap-4 sm:flex">
 							{connected ? (
 								<div
-									class={tw`px-5 py-2.5 text-sm font-medium text-white bg-blue-600 rounded-md shadow disabled:(bg-gray-800 border border-blue-600 opacity-50 cursor-not-allowed)`}>
+									class="px-5 py-2.5 text-sm font-medium text-white bg-blue-600 rounded-md shadow disabled:(bg-gray-800 border border-blue-600 opacity-50 cursor-not-allowed)">
 									Connected
 								</div>
 							) : (
 								<button
 									onClick={signIn}
-									class={tw`px-5 py-2.5 text-sm font-medium text-white bg-blue-600 rounded-md shadow disabled:(bg-gray-800 border border-blue-600 opacity-50 cursor-not-allowed)`}>
+									class="px-5 py-2.5 text-sm font-medium text-white bg-blue-600 rounded-md shadow disabled:(bg-gray-800 border border-blue-600 opacity-50 cursor-not-allowed)">
 									Connect
 								</button>
 							)}
 						</div>
 
-						<div class={tw`block md:hidden`}>
+						<div class="block md:hidden">
 							<button
-								class={tw`p-2 text-white transition bg-gray-800 rounded hover:text-gray-50`}>
+								class="p-2 text-white transition bg-gray-800 rounded hover:text-gray-50">
 								<svg
 									xmlns='http://www.w3.org/2000/svg'
-									class={tw`w-5 h-5`}
+									class="w-5 h-5"
 									fill='none'
 									viewBox='0 0 24 24'
 									stroke='currentColor'
