@@ -1,3 +1,5 @@
+This repository is superseded by my personal page that use the same technology and provide probably better start if you are interested in building web3 on Fresh. Take a look [here](https://github.com/vorcigernix/adamsobotka)
+
 # fresh project
 
 ### Usage
